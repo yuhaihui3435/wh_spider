@@ -67,3 +67,285 @@ INFO:root:编号为 8243 的项目 执行了第 0 次
 INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): www.circ.gov.cn
 INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): www.circ.gov.cn
 INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 11 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 11 次 
+INFO:root:编号为 8243 的项目 执行了第 12 次 
+INFO:root:编号为 8243 的项目 执行了第 13 次 
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 687, in _finalize_fairy
+    fairy._reset(pool)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 827, in _reset
+    self._reset_agent.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1621, in rollback
+    self._do_rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1659, in _do_rollback
+    self.connection._rollback_impl()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 703, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception
+    util.reraise(*exc_info)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 187, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 701, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/dialects/mysql/base.py", line 1608, in do_rollback
+    dbapi_connection.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 893, in rollback
+    self._execute_query("ROLLBACK")
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 905, in _execute_query
+    self.cmd_query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 525, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 299, in _send_cmd
+    return self._socket.recv()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/network.py", line 241, in recv_plain
+    chunk = self.sock.recv(4 - packet_len)
+KeyboardInterrupt
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 687, in _finalize_fairy
+    fairy._reset(pool)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 827, in _reset
+    self._reset_agent.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1621, in rollback
+    self._do_rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1659, in _do_rollback
+    self.connection._rollback_impl()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 703, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception
+    util.reraise(*exc_info)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 187, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 701, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/dialects/mysql/base.py", line 1608, in do_rollback
+    dbapi_connection.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 893, in rollback
+    self._execute_query("ROLLBACK")
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 905, in _execute_query
+    self.cmd_query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 525, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 299, in _send_cmd
+    return self._socket.recv()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/network.py", line 241, in recv_plain
+    chunk = self.sock.recv(4 - packet_len)
+KeyboardInterrupt
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 11 次 
+INFO:root:编号为 8243 的项目 执行了第 12 次 
+INFO:root:编号为 8243 的项目 执行了第 13 次 
+INFO:root:编号为 8243 的项目 执行了第 14 次 
+INFO:root:编号为 8243 的项目 执行了第 15 次 
+INFO:root:编号为 8243 的项目 执行了第 16 次 
+INFO:root:编号为 8243 的项目 执行了第 17 次 
+INFO:root:编号为 8243 的项目 执行了第 18 次 
+INFO:root:编号为 8243 的项目 执行了第 19 次 
+INFO:root:编号为 8243 的项目 执行了第 20 次 
+INFO:root:编号为 8243 的项目 执行了第 21 次 
+INFO:root:编号为 8243 的项目 执行了第 22 次 
+INFO:root:编号为 8243 的项目 执行了第 23 次 
+INFO:root:编号为 8243 的项目 执行了第 24 次 
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 687, in _finalize_fairy
+    fairy._reset(pool)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/pool.py", line 827, in _reset
+    self._reset_agent.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1621, in rollback
+    self._do_rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1659, in _do_rollback
+    self.connection._rollback_impl()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 703, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception
+    util.reraise(*exc_info)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 187, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 701, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/dialects/mysql/base.py", line 1608, in do_rollback
+    dbapi_connection.rollback()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 893, in rollback
+    self._execute_query("ROLLBACK")
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 905, in _execute_query
+    self.cmd_query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 525, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/connection.py", line 299, in _send_cmd
+    return self._socket.recv()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mysql/connector/network.py", line 241, in recv_plain
+    chunk = self.sock.recv(4 - packet_len)
+KeyboardInterrupt
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 11 次 
+INFO:root:编号为 8243 的项目 执行了第 12 次 
+INFO:root:编号为 8243 的项目 执行了第 13 次 
+INFO:root:编号为 8243 的项目 执行了第 14 次 
+INFO:root:编号为 8243 的项目 执行了第 15 次 
+INFO:root:编号为 8243 的项目 执行了第 16 次 
+INFO:root:编号为 8243 的项目 执行了第 17 次 
+INFO:root:编号为 8243 的项目 执行了第 18 次 
+INFO:root:编号为 8243 的项目 执行了第 19 次 
+INFO:root:编号为 8243 的项目 执行了第 20 次 
+INFO:root:编号为 8243 的项目 执行了第 21 次 
+INFO:root:编号为 8243 的项目 执行了第 22 次 
+INFO:root:编号为 8243 的项目 执行了第 23 次 
+INFO:root:编号为 8243 的项目 执行了第 24 次 
+INFO:root:编号为 8243 的项目 执行了第 25 次 
+INFO:root:编号为 8243 的项目 执行了第 26 次 
+INFO:root:编号为 8243 的项目 执行了第 27 次 
+INFO:root:编号为 8243 的项目 执行了第 28 次 
+INFO:root:编号为 8243 的项目 执行了第 29 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 30 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 31 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+ERROR:root:/tabid/2576/ctl/ViewOrganization/mid/8243/ItemID/440801/Default.aspx返回的内容不正确。没有解析出正确内容
+ERROR:root:/tabid/2576/ctl/ViewOrganization/mid/8243/ItemID/440804/Default.aspx返回的内容不正确。没有解析出正确内容
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 0 次 
+INFO:root:编号为 8243 的项目 执行了第 1 次 
+INFO:root:编号为 8243 的项目 执行了第 2 次 
+INFO:root:编号为 8243 的项目 执行了第 3 次 
+INFO:root:编号为 8243 的项目 执行了第 4 次 
+INFO:root:编号为 8243 的项目 执行了第 5 次 
+INFO:root:编号为 8243 的项目 执行了第 6 次 
+INFO:root:编号为 8243 的项目 执行了第 7 次 
+INFO:root:编号为 8243 的项目 执行了第 8 次 
+INFO:root:编号为 8243 的项目 执行了第 9 次 
+INFO:root:编号为 8243 的项目 执行了第 10 次 
+INFO:root:编号为 8243 的项目 执行了第 11 次 
+INFO:root:编号为 8243 的项目 执行了第 12 次 

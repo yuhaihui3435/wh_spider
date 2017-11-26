@@ -15,7 +15,7 @@ import random
 import db_kit
 import logging
 
-domain = 'http://www.circ.gov.cn/';
+domain = 'http://www.circ.gov.cn/'
 target = 'http://www.circ.gov.cn/tabid/2576/Default.aspx'
 headers = [{"User-Agent": "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"},
            {
@@ -29,7 +29,9 @@ headers = [{"User-Agent": "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"},
 
 
 def getMainHTML():
-    res = requests.get(target, params=None, headers=random.sample(headers, 1)[0]);
+    session=requests.session()
+    res = session.get(target, params=None, headers=random.sample(headers, 1)[0]);
+    cookie=res.cookies;
     soup = BeautifulSoup(res.content, 'lxml')
     div_a = soup.find(id='ess_contentpane').find_all('a', recursive=False)
     # div_a=div_a.find_next_siblings('a')
@@ -42,35 +44,65 @@ def getMainHTML():
         pageNum = int(pageNum if pageNum else '1')
         bxgslx = soup.find(id='ess_ctr' + a['name'] + '_OrganizationList_lblClassName')
         print('当前页 %d ,一共 %d 页' % (pageNum, pageTotal))
-
+        __VIEWSTATE = ''
+        __VIEWSTATEGENERATOR =  ''
         for i in range(0, pageTotal):
             logging.info('编号为 %s 的项目 执行了第 %d 次 ' % (a['name'], i))
             urls = []
-            p={}
-            __VIEWSTATE =''
-            __VIEWSTATEGENERATOR=''
+            p = {}
+            header = {}
+
+
             if (i == 0):
                 urls = soup.find(id='ess_ctr' + a['name'] + '_OrganizationList_rptCompany').find_all('a')
-                __VIEWSTATE=soup.find(id='__VIEWSTATE')['value']
-                __VIEWSTATEGENERATOR=soup.find(id='__VIEWSTATEGENERATOR')['value']
+                __VIEWSTATE = soup.find(id='__VIEWSTATE')['value']
+                __VIEWSTATEGENERATOR = soup.find(id='__VIEWSTATEGENERATOR')['value']
 
 
             else:
 
+                p = {
+                    "__EVENTTARGET": (None, "ess$ctr" + a['name'] + "$OrganizationList$lbnToPage",None,),
+                    "ess$ctr" + a['name'] + "$OrganizationList$lblAtPageNum": (None, str(i+1)),
+                    "__EVENTARGUMENT": (None, ""),
+                    # "ess$ctr8245$OrganizationList$lblAtPageNum": (None, ""),
+                    "__VIEWSTATEGENERATOR": (None, __VIEWSTATEGENERATOR),
+                    # "ess$ctr8247$OrganizationList$lblAtPageNum": (None, "")
+                    # , "ess$ctr8248$OrganizationList$lblAtPageNum": (None, ""),
+                    # "ess$ctr8249$OrganizationList$lblAtPageNum": (None, ""),
+                    # "ess$ctr8250$OrganizationList$lblAtPageNum": (None, ""),
+                    # "__essVariable": (None, ""),
+                    # "ScrollTop": (None, ""),
+                    # "select": (None, ""),
+                    # "select2": (None, ""),
+                    # "q": (None, ""),
+                    "__VIEWSTATE": (None, __VIEWSTATE)}
 
+                header = random.sample(headers, 1)[0];
+                header=header['User-Agent']
 
-
-                _res = requests.post(target,
-                                     params={"__EVENTTARGET": "ess$ctr" + a['name'] + "$OrganizationList$lbnNextPage",
-                                             "ess$ctr" + a['name'] + "$OrganizationList$lblAtPageNum": pageNum},
-                                     json=None, headers=random.sample(headers, 1)[0])
-                print('分页请求返回的数据')
-                print(_res.content)
+                # proxy = requests.get('http://192.168.50.229:5010/get').text
+                # proxies = {"http": proxy}
+                _res = session.post(target,
+                                     files=p,cookies=cookie,
+                                    # proxies=proxies,
+                                     headers={
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+                        "Referer": "http://www.circ.gov.cn/tabid/2576/Default.aspx",
+                        "Host": "www.circ.gov.cn",
+                        "Accept-Language": "zh-CN,zh;q = 0.9",
+                        "Origin": "http://www.circ.gov.cn",
+                        # "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryl8pqZs1k7pDwvrlo",
+                        "User-Agent": header})
+                # print('分页请求参数')
+                # print(_res.request.body.decode())
+                # print(_res.request.headers)
+                # print(_res.content.decode())
                 _soup = BeautifulSoup(_res.content, 'lxml')
                 urls = _soup.find(id='ess_ctr' + a['name'] + '_OrganizationList_rptCompany').find_all('a')
-                print(urls)
-            print(__VIEWSTATEGENERATOR)
-            print(__VIEWSTATE)
+                __VIEWSTATE = soup.find(id='__VIEWSTATE')['value']
+                __VIEWSTATEGENERATOR = soup.find(id='__VIEWSTATEGENERATOR')['value']
+            print(urls)
             companyInfo = None
             insurer = None
             # companyInfos=[];
@@ -94,14 +126,14 @@ def getMainHTML():
                         insurer.catalog = bxgslx.get_text()
                         db_kit.insert(insurer)
                     else:
-                        logging.error(detailUrl + '返回的内容不正确。没有解析出正确内容')
+                        logging.error(detailUrl[0] + '返回的内容不正确。没有解析出正确内容')
                 # companyInfos.append(companyInfo)
-                time.sleep(random.randint(1, 2))
+                    time.sleep(random.randint(1, 2))
                 # writeExcel(bxgslx.string,companyInfos)
 
 
 def getCompanyHtml(url):
-    proxy = requests.get('http://localhost:5010/get').text
+    proxy = requests.get('http://192.168.50.229:5010/get').text
     proxies = {"http": proxy}
     bl = True
     res = None;
@@ -109,18 +141,22 @@ def getCompanyHtml(url):
         print('爬行的URL>>' + domain + url)
         print('使用的代理为>>' + str(proxies))
         try:
-            res = requests.get(domain + url, params=None, headers=headers, proxies=proxies, timeout=10)
-            if (res.ok and res.text != '' and res.text.find('400 Bad Request') == -1):
+            res = requests.get(domain + url, params=None, headers=random.sample(headers, 1)[0], proxies=proxies, timeout=8)
+            if res.status_code==200 and res.text != '' and res.text.find('400 Bad Request') == -1 and res.text.find("class=\"TableHeader1\"")>-1:
                 bl = False
             # print('请求得到的文本数据:'+res.text)
-            if (res.text.find('400 Bad Request') > -1):
+            elif (res.text.find('400 Bad Request') > -1):
                 print('出现了400错误')
+                raise Exception
+            else:
+                print("返回了未知的页面内容")
+                print(res.text)
                 raise Exception
         except Exception:
             print('出现了错误，开始更换代理')
             # proxies = {"http": requests.get('http://localhost:5010/get').text}
-            requests.get("http://127.0.0.1:5010/delete/?proxy={}".format(proxy))
-            proxy = requests.get('http://localhost:5010/get').text
+            requests.get("http://192.168.50.229:5010/delete/?proxy={}".format(proxy))
+            proxy = requests.get('http://192.168.50.229:5010/get').text
             proxies['http'] = proxy
 
     ret = [];
@@ -211,3 +247,5 @@ if __name__ == '__main__':
     # print(rr.request.headers)
 
     # print(rr.text)
+
+    print()
