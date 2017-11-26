@@ -35,7 +35,7 @@ def getMainHTML(target,mf_tpe):
     page=soup.find('div',class_='paging').find_all('span')
     recordCount=re.sub('\D',"",page[1].get_text())
     recordCount=recordCount[1:recordCount.__len__()]
-    for i in range(71,int(recordCount)+1):
+    for i in range(1,int(recordCount)+1):
         print("爬取第 %d 页的数据"%(i) )
         params={"currentPage":i,"orgType":"2"}
         res = requests.get(target, params=params, headers=random.sample(headers, 1)[0]);
@@ -55,32 +55,36 @@ def getMainHTML(target,mf_tpe):
                 else:
                     a=tr.find("a")
                     url=a["href"]
-                    print(url)
-                    ret=db_kit.findMFOnByUrl(url);
-                    if ret is None :
-                        info=getDetailHtml(url)
-                        mf=db_kit.Mf()
-                        mf.type=mf_tpe
-                        mf.catalog=str(info[0]).replace("\r\n","").replace("\t","").strip()
-                        mf.reg_time=info[1]
-                        mf.reg_org=info[2]
-                        mf.reg_num=info[3]
-                        mf.legal=info[4]
-                        mf.mng_unit=str(info[5]).replace("\r\n","").replace("\t","").strip()
-                        mf.expiry_date=str(info[6]).replace("\r\n","").replace("\t","").strip()
-                        mf.scope=info[7]
-                        mf.ads=info[8]
-                        mf.zip_code=info[9]
-                        mf.tel=info[10]
-                        mf.phone=info[11]
-                        mf.url=url
-
+                    txt = a.get_text()
+                    ret = db_kit.findMFOnByUrl(url,mf_tpe);
+                    if ret is None:
+                        info = getDetailHtml(url)
+                        mf = db_kit.Mf()
+                        mf.type = mf_tpe
+                        mf.catalog = str(info[0]).replace("\r\n", "").replace("\t", "").strip()
+                        mf.reg_time = info[1]
+                        mf.reg_org = info[2]
+                        mf.reg_num = info[3]
+                        mf.legal = info[4]
+                        mf.mng_unit = str(info[5]).replace("\r\n", "").replace("\t", "").strip()
+                        mf.expiry_date = str(info[6]).replace("\r\n", "").replace("\t", "").strip()
+                        mf.scope = info[7]
+                        mf.ads = info[8]
+                        mf.zip_code = info[9]
+                        mf.tel = info[10]
+                        mf.phone = info[11]
+                        mf.url = url
+                        mf.reg_name = txt
                         db_kit.insert(mf)
+                    elif ret and not ret.reg_name:
+                        print("执行了更新操作")
+                        ret.reg_name = txt
+                        db_kit.update(ret)
 
 
 
 def getDetailHtml(url):
-    proxy = requests.get('http://localhost:5010/get').text
+    proxy = requests.get('http://192.168.50.229:5010/get').text
     proxies = {"http": proxy}
     bl = True
     res = None;
@@ -102,8 +106,8 @@ def getDetailHtml(url):
         except Exception:
             print('出现了错误，开始更换代理')
             # proxies = {"http": requests.get('http://localhost:5010/get').text}
-            requests.get("http://localhost:5010/delete/?proxy={}".format(proxy))
-            proxy = requests.get('http://localhost:5010/get').text
+            requests.get("http://192.168.50.229:5010/delete/?proxy={}".format(proxy))
+            proxy = requests.get('http://192.168.50.229:5010/get').text
             proxies['http'] = proxy
 
     ret = [];
