@@ -28,13 +28,29 @@ class Insurer(Base):
     state = Column(String(100))
     catalog = Column(String(100))
     url = Column(String(255))
-class mf(Base):
+class Mf(Base):
     # 表的名字:
     __tablename__ = 'mfw'
+    # 表的结构:
+    id = Column(Integer, primary_key=True)
+    type = Column(String(20))
+    catalog = Column(String(50))
+    reg_time = Column(String(50))
+    reg_org = Column(String(100))
+    reg_num = Column(String(50))
+    legal = Column(String(30))
+    mng_unit = Column(String(100))
+    expiry_date = Column(String(20))
+    scope = Column(String(255))
+    ads = Column(String(255))
+    zip_code = Column(String(10))
+    tel = Column(String(20))
+    phone = Column(String(50))
+    url = Column(String(255))
 
-def insert(insurer):
+def insert(obj):
     session=DBSession()
-    session.add(insurer)
+    session.add(obj)
     # 提交即保存到数据库:
     session.commit()
     # 关闭session:
@@ -56,3 +72,13 @@ def update(insurer):
     session.commit()
     # 关闭session:
     session.close()
+
+
+def findMFOnByUrl(url):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    ret = session.query(Mf).filter(Mf.url == url).first()
+    # 关闭Session:
+    session.close()
+    return ret
