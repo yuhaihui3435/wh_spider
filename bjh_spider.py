@@ -33,7 +33,7 @@ def getMainHTML():
     res = session.get(target, params=None, headers=random.sample(headers, 1)[0]);
     cookie=res.cookies;
     soup = BeautifulSoup(res.content, 'lxml')
-    div_a = soup.find(id='ess_contentpane').find_all('a', recursive=False)
+    div_a = soup.find('ess_contentpane').find_all('a', recursive=False)
     # div_a=div_a.find_next_siblings('a')
     bxgslx = ''
     for a in div_a:

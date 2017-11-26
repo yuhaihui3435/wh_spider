@@ -1,4 +1,4 @@
-from sqlalchemy import Column, create_engine, Integer,String
+from sqlalchemy import Column, create_engine, Integer,String,TEXT
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -38,14 +38,14 @@ class Mf(Base):
     reg_time = Column(String(50))
     reg_org = Column(String(100))
     reg_num = Column(String(50))
-    legal = Column(String(30))
+    legal = Column(String(50))
     mng_unit = Column(String(100))
-    expiry_date = Column(String(20))
-    scope = Column(String(255))
+    expiry_date = Column(String(50))
+    scope = Column(TEXT)
     ads = Column(String(255))
-    zip_code = Column(String(10))
-    tel = Column(String(20))
-    phone = Column(String(50))
+    zip_code = Column(String(50))
+    tel = Column(String(100))
+    phone = Column(String(100))
     url = Column(String(255))
 
 def insert(obj):
