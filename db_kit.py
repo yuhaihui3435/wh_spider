@@ -82,3 +82,12 @@ def findMFOnByUrl(url):
     # 关闭Session:
     session.close()
     return ret
+
+def findAll(model,val):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    ret = session.query(model).filter(model.catalog == val).all()
+    # 关闭Session:
+    session.close()
+    return ret
