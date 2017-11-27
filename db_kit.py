@@ -79,7 +79,9 @@ def findMFOnByUrl(url,tpe):
     # 创建Session:
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-    ret = session.query(Mf).filter(Mf.url == url,Mf.type==tpe).first()
+    ret = session.query(Mf).filter(Mf.url == url,
+                                   # Mf.type==tpe
+                                   ).first()
     # 关闭Session:
     session.close()
     return ret
