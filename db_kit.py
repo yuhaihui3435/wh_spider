@@ -47,6 +47,7 @@ class Mf(Base):
     tel = Column(String(100))
     phone = Column(String(100))
     url = Column(String(255))
+    reg_name=Column(String(255))
 
 def insert(obj):
     session=DBSession()
@@ -56,29 +57,31 @@ def insert(obj):
     # 关闭session:
     session.close()
 
-def findOnByUrl(url):
+def findOnByUrl(url,type):
     # 创建Session:
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-    ret = session.query(Insurer).filter(Insurer.url == url).first()
+    ret = session.query(Insurer).filter(Insurer.url == url,Insurer.ty).first()
     # 关闭Session:
     session.close()
     return ret
 
-def update(insurer):
+def update(obj):
     session = DBSession()
-    session.merge(insurer)
+    session.merge(obj)
     # 提交即保存到数据库:
     session.commit()
     # 关闭session:
     session.close()
 
 
-def findMFOnByUrl(url):
+def findMFOnByUrl(url,tpe):
     # 创建Session:
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-    ret = session.query(Mf).filter(Mf.url == url).first()
+    ret = session.query(Mf).filter(Mf.url == url,
+                                   # Mf.type==tpe
+                                   ).first()
     # 关闭Session:
     session.close()
     return ret
