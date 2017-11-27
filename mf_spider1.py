@@ -35,7 +35,7 @@ def getMainHTML(target,mf_tpe):
     page=soup.find('div',class_='paging').find_all('span')
     recordCount=re.sub('\D',"",page[1].get_text())
     recordCount=recordCount[1:recordCount.__len__()]
-    for i in range(53,int(recordCount)+1):
+    for i in range(78,int(recordCount)+1):
         print("爬取第 %d 页的数据"%(i) )
         params={"currentPage":i,"type":"2"}
         res = requests.get(target, params=params, headers=random.sample(headers, 1)[0]);
@@ -55,8 +55,8 @@ def getMainHTML(target,mf_tpe):
                 else:
                     a=tr.find("a")
                     url=a["href"]
-                    print(url)
-                    ret=db_kit.findMFOnByUrl(url);
+                    txt=a.get_text()
+                    ret=db_kit.findMFOnByUrl(url,mf_tpe);
                     if ret is None :
                         info=getDetailHtml(url)
                         mf=db_kit.Mf()
@@ -74,8 +74,15 @@ def getMainHTML(target,mf_tpe):
                         mf.tel=info[10]
                         mf.phone=info[11]
                         mf.url=url
-
+                        mf.reg_name=txt
                         db_kit.insert(mf)
+                        time.sleep(0.5)
+                    elif ret and not ret.reg_name:
+                        print("执行了更新操作")
+                        ret.reg_name = txt
+                        db_kit.update(ret)
+
+
 
 
 
@@ -86,9 +93,11 @@ def getDetailHtml(url):
     res = None;
     while (bl):
         print('爬行的URL>>' + domain + url)
-        print('使用的代理为>>' + str(proxies))
+        # print('使用的代理为>>' + str(proxies))
         try:
-            res = requests.get(domain + url, params=None, headers=random.sample(headers, 1)[0], proxies=proxies, timeout=8)
+            res = requests.get(domain + url, params=None, headers=random.sample(headers, 1)[0],
+                               # proxies=proxies,
+                               timeout=6)
             if res.status_code==200 and res.text != '' and res.text.find('400 Bad Request') == -1 and res.text.find("class=\"c_table_style5\"")>-1:
                 bl = False
             # print('请求得到的文本数据:'+res.text)
@@ -102,10 +111,10 @@ def getDetailHtml(url):
         except Exception:
             print('出现了错误，开始更换代理')
             # proxies = {"http": requests.get('http://localhost:5010/get').text}
-            requests.get("http://localhost:5010/delete/?proxy={}".format(proxy))
-            proxy = requests.get('http://localhost:5010/get').text
-            proxies['http'] = proxy
-
+            # requests.get("http://localhost:5010/delete/?proxy={}".format(proxy))
+            # proxy = requests.get('http://localhost:5010/get').text
+            # proxies['http'] = proxy
+            time.sleep(1)
     ret = [];
     if (res.text):
         print('开始解析爬行到的html数据' + str(res.content))
@@ -121,4 +130,5 @@ def getDetailHtml(url):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='mf1.log', level=logging.INFO)
     getMainHTML(target=targets[1],mf_tpe="年检结果公告")
