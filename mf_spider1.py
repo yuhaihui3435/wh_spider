@@ -35,7 +35,7 @@ def getMainHTML(target,mf_tpe):
     page=soup.find('div',class_='paging').find_all('span')
     recordCount=re.sub('\D',"",page[1].get_text())
     recordCount=recordCount[1:recordCount.__len__()]
-    for i in range(78,int(recordCount)+1):
+    for i in range(108,int(recordCount)+1):
         print("爬取第 %d 页的数据"%(i) )
         params={"currentPage":i,"type":"2"}
         res = requests.get(target, params=params, headers=random.sample(headers, 1)[0]);
@@ -81,14 +81,15 @@ def getMainHTML(target,mf_tpe):
                         print("执行了更新操作")
                         ret.reg_name = txt
                         db_kit.update(ret)
-
+                    else:
+                        print("数据已经存在， %s "%(ret.reg_name))
 
 
 
 
 def getDetailHtml(url):
-    proxy = requests.get('http://localhost:5010/get').text
-    proxies = {"http": proxy}
+    # proxy = requests.get('http://localhost:5010/get').text
+    # proxies = {"http": proxy}
     bl = True
     res = None;
     while (bl):

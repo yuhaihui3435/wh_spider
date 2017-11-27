@@ -94,3 +94,11 @@ def findAll(model,val):
     # 关闭Session:
     session.close()
     return ret
+def findMfAll():
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    ret = session.query(dict(Mf.url)).filter().all()
+    # 关闭Session:
+    session.close()
+    return ret
