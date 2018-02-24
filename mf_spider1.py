@@ -11,6 +11,7 @@ import time
 import random
 import db_kit
 import logging
+import send_email
 
 domain = 'http://www.synpo.gov.cn'
 targets = ['http://www.synpo.gov.cn/cms/primitSearch.jspx',"http://www.synpo.gov.cn/cms/yearcheckSearch.jspx"]
@@ -35,7 +36,7 @@ def getMainHTML(target,mf_tpe):
     page=soup.find('div',class_='paging').find_all('span')
     recordCount=re.sub('\D',"",page[1].get_text())
     recordCount=recordCount[1:recordCount.__len__()]
-    for i in range(108,int(recordCount)+1):
+    for i in range(358,int(recordCount)+1):
         print("爬取第 %d 页的数据"%(i) )
         params={"currentPage":i,"type":"2"}
         res = requests.get(target, params=params, headers=random.sample(headers, 1)[0]);
@@ -74,7 +75,7 @@ def getMainHTML(target,mf_tpe):
                         mf.tel=info[10]
                         mf.phone=info[11]
                         mf.url=url
-                        mf.reg_name=txt
+                        mf.reg_name=str(txt).replace("\r\n","").replace("\t","").strip()
                         db_kit.insert(mf)
                         time.sleep(0.5)
                     elif ret and not ret.reg_name:
@@ -83,7 +84,7 @@ def getMainHTML(target,mf_tpe):
                         db_kit.update(ret)
                     else:
                         print("数据已经存在， %s "%(ret.reg_name))
-
+    send_email.sendEmail("程序完成，快去查看")
 
 
 
