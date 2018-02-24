@@ -27,18 +27,18 @@ if __name__ == '__main__':
 
     ret=db_kit.findMfAll()
 
-    for index,r in enumerate(ret,0):
-        worksheet.write(index,0,ret.reg_name)
-        worksheet.write(index,1,ret.reg_time)
-        worksheet.write(index,2,ret.reg_org)
-        worksheet.write(index,3,ret.reg_num)
-        worksheet.write(index,4,ret.legal)
-        worksheet.write(index,5,ret.mng_unit)
-        worksheet.write(index,6,ret.expiry_date)
-        worksheet.write(index,7,ret.ads)
-        worksheet.write(index,8,ret.tel)
-        worksheet.write(index,9,ret.phone)
-        worksheet.write(index,10,ret.scope)
+    for index,r in enumerate(ret,1):
+        worksheet.write(index,0,r.reg_name)
+        worksheet.write(index,1,r.reg_time)
+        worksheet.write(index,2,r.reg_org)
+        worksheet.write(index,3,r.reg_num)
+        worksheet.write(index,4,r.legal)
+        worksheet.write(index,5,r.mng_unit)
+        worksheet.write(index,6,r.expiry_date)
+        worksheet.write(index,7,r.ads)
+        worksheet.write(index,8,r.tel)
+        worksheet.write(index,9,r.phone)
+        worksheet.write(index,10,r.scope)
 
     workbook.close();
 
