@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 # 初始化数据库连接:
-engine = create_engine('mysql+mysqlconnector://ab:*(&^%$)(*&^%$%*KJU@39.106.213.166:43333/wh_bx')
+engine = create_engine('mysql+mysqlconnector://ab:*(&^%$)(*&^%$%*KJU@39.106.213.166:43333/wh_bx',pool_size=100, pool_recycle=3600, )
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 
@@ -101,6 +101,13 @@ def findMFOnByUrl(url, tpe):
     # 关闭Session:
     session.close()
     return ret
+
+def existCheck(code,insurance):
+    session = DBSession()
+    ret=session.query(INOCC).filter(INOCC.code==code,INOCC.insurance==insurance).all()
+
+    return 'yes' if len(ret)>0 else 'no'
+
 
 
 def findAll(model, val):

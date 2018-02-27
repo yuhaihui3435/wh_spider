@@ -1,6 +1,7 @@
 import xlrd
 from db_kit import INOCC
 import db_kit
+from bs4 import BeautifulSoup
 
 def RAndWXls(file,col,bRow,eRow,insurance,hasCode=True):
     workbook = xlrd.open_workbook(file)
@@ -89,49 +90,118 @@ def RAndWXls(file,col,bRow,eRow,insurance,hasCode=True):
         print ('\n'.join(['%s:%s' % item for item in obj.__dict__.items()]))
         db_kit.insert(obj)
 
-def RAndWByRow(file,bRow,eRow,insurance):
+def RAndWPACC(file,bRow,eRow,insurance):
     workbook = xlrd.open_workbook(file)
-    sheet = workbook.sheet_by_index(0)
+    sheet = workbook.sheet_by_index(2)
     obj=None
     fCode=''
-    fName='';
+    fName=''
     sCode=''
+    header=''
+    lastF=''
     for i in range(bRow, eRow):
-        if(sheet.cell(i,0).value!=''):
-            fCode=str(int(sheet.cell(i,0).value))
-            fName=str(sheet.cell(i,1).value)
+        if(str(sheet.cell(i,0).value).strip()!=''):
+            fCode=str(sheet.cell(i,0).value)
+            if fCode!=lastF:
+                header=''
+            fName=str(sheet.cell(i,0).value)
             obj=INOCC()
             obj.code=fCode
             obj.name=fName
             obj.insurance=insurance
-            db_kit.insert(obj)
-            printObj(obj)
-        if(sheet.cell(i,2).value!=''):
-            sCode = str(int(sheet.cell( i,2).value))
-            sName = str(sheet.cell( i,3).value)
+            if db_kit.existCheck(obj.code,insurance)=='no':
+                db_kit.insert(obj)
+                printObj(obj)
+        if(str(sheet.cell(i,1).value).strip()!=''):
+            sCode = str(sheet.cell( i,1).value)
+            sName = str(sheet.cell( i,1).value)
             obj = INOCC()
             obj.pCode=fCode
             obj.code = sCode
             obj.name = sName
             obj.insurance = insurance
-            db_kit.insert(obj)
-            printObj(obj)
-        if (sheet.cell( i,4).value != ''):
-            tData=str(sheet.cell( i,4).value)
-            ta=tData.split("、")
-            for j in range(0,len(ta)):
-                tCode=sCode+str(j).zfill(2)
-                tName=ta[j]
-                obj=INOCC()
-                obj.name=tName
-                obj.code=tCode
-                obj.insurance=insurance
-                obj.pCode=sCode
-                obj.type=int(sheet.cell(i,5).value) if str(sheet.cell(i,5).value).strip()!='' else ''
+            if db_kit.existCheck(obj.code,insurance)=='no':
                 db_kit.insert(obj)
                 printObj(obj)
+        if (str(sheet.cell( i,2).value).strip() != ''):
+
+            obj=INOCC()
+            obj.name=header+'-'+str(sheet.cell( i,3).value) if header!='' else str(sheet.cell( i,3).value)
+            obj.name=obj.name.strip()
+            obj.code=str(sheet.cell( i,2).value).strip()
+            obj.insurance=insurance
+            obj.pCode=sCode
+            obj.type=int(sheet.cell(i,4).value) if str(sheet.cell(i,4).value).strip()!='' else ''
+            db_kit.insert(obj)
+            printObj(obj)
+        elif str(sheet.cell( i,3).value).strip().startswith('注：'):
+            continue
+        else:
+            header=str(sheet.cell( i,3).value)
 
 
+
+        lastF=fCode
+
+
+def RAndWPAYL(file,bRow,eRow,insurance):
+    workbook = xlrd.open_workbook(file)
+    sheet = workbook.sheet_by_index(1)
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    for i in range(bRow, eRow):
+        if (str(sheet.cell(i, 0).value).strip() != ''):
+            fCode = str(sheet.cell(i, 0).value).strip()[0:2]
+            fName = str(sheet.cell(i, 0).value).strip()[2:]
+            if fCode!=lastF:
+                header=''
+            obj = INOCC()
+            obj.code = fCode
+            obj.name = fName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 1).value).strip() != ''):
+            sCode = str(sheet.cell(i, 1).value).strip()[0:4]
+            sName = str(sheet.cell(i, 1).value).strip()[4:]
+            obj = INOCC()
+            obj.pCode = fCode
+            obj.code = sCode
+            obj.name = sName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 2).value).strip() != ''):
+
+            obj = INOCC()
+            obj.name = header + '-' + str(sheet.cell(i, 3).value) if header != '' else str(sheet.cell(i, 3).value)
+            obj.name = obj.name.strip()
+            obj.code = str(sheet.cell(i, 2).value).strip()
+            obj.insurance = insurance
+            obj.pCode = sCode
+            if sheet.cell(i,4).ctype==2:
+                obj.type = int(sheet.cell(i, 4).value) if str(sheet.cell(i, 4).value).strip() != '' else ''
+            else:
+                obj.type = str(sheet.cell(i, 4).value)
+            db_kit.insert(obj)
+            printObj(obj)
+        elif str(sheet.cell(i, 3).value).strip().startswith('注：'):
+            continue
+        else:
+            header = str(sheet.cell(i, 3).value)
+
+        lastF = fCode
+
+
+def RAndWTPYRS_html():
+    soup = BeautifulSoup(open('/Users/yuhaihui8913/Documents/wh/太平洋人寿.html'))
+    print(soup.prettify())
 
 
 def printObj(obj):
@@ -143,4 +213,6 @@ if __name__ == '__main__':
 
 
     # RAndWXls('/Users/yuhaihui/Documents/wh/人保财产.xls',2,679,699,'iorbcc',False)
-    RAndWByRow('/Users/yuhaihui/Documents/wh/人保健康职业类别表.xlsx',150,325,'iorbjk')
+    # RAndWPACC('/Users/yuhaihui8913/Documents/wh/太平洋财产.xls',1,868,'iotpycc')
+    # RAndWPAYL('/Users/yuhaihui8913/Documents/wh/职业类别表(平安).xls',2,1223,'iopayl')
+    RAndWTPYRS_html()
