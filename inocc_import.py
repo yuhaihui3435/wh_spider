@@ -200,8 +200,116 @@ def RAndWPAYL(file,bRow,eRow,insurance):
 
 
 def RAndWTPYRS_html():
-    soup = BeautifulSoup(open('/Users/yuhaihui8913/Documents/wh/太平洋人寿.html'))
+    soup = BeautifulSoup(open('/Users/yuhaihui8913/Documents/wh/太平洋人寿final.html'))
     print(soup.prettify())
+    trs = soup.find("table", class_="MsoNormalTable").find_all("tr")
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    for tr in trs:
+        tds = tr.find_all("td")
+
+        if len(tds)==5:
+           if True:
+               ps=tds[0].find_all('p')
+               fCode = str(ps[0].get_text()).strip() if str(ps[0].get_text()).strip()!='' else fCode  if len(ps)==1 else ps[0].get_text()
+               fName = str(ps[0].get_text()).strip() if str(ps[0].get_text()).strip()!='' else fCode if len(ps)==1 else ps[1].get_text()
+               if fCode != lastF:
+                   header = ''
+               obj = INOCC()
+               obj.code = fCode
+               obj.name = fName
+               obj.insurance = 'iotpyrs'
+               if db_kit.existCheck(obj.code, 'iotpyrs') == 'no':
+                    db_kit.insert(obj)
+                    printObj(obj)
+           if True:
+               ps = tds[1].find_all('p')
+               sCode = str(ps[0].get_text()).strip() if len(ps)==1 else str(ps[0].get_text()).strip()
+               sName = str(ps[0].get_text()).strip() if len(ps)==1 else str(ps[1].get_text()).strip()
+               obj = INOCC()
+               obj.pCode = fCode
+               obj.code = sCode
+               obj.name = sName
+               obj.insurance = 'iotpyrs'
+               if db_kit.existCheck(obj.code, 'iotpyrs') == 'no':
+                    db_kit.insert(obj)
+                    printObj(obj)
+           if True:
+
+               obj = INOCC()
+               spans=tds[2].p.contents
+               obj.name = header + '-' + str(tds[2].p.contents[1].get_text()).strip() if header != '' else str(tds[2].p.contents[1].get_text()).strip()
+               obj.name = obj.name.strip()
+               obj.code = tds[2].p.contents[0].get_text().strip()
+               obj.insurance = 'iotpyrs'
+               obj.pCode = sCode
+               obj.type = tds[4].p.span.get_text().strip()
+               db_kit.insert(obj)
+               printObj(obj)
+        if len(tds)==4:
+           if True:
+               ps=tds[0].find_all('p')
+               sCode = str(ps[0].get_text()).strip()
+               sName = str(ps[1].get_text()).strip()
+               obj = INOCC()
+               obj.pCode = fCode
+               obj.code = sCode
+               obj.name = sName
+               obj.insurance = 'iotpyrs'
+               if db_kit.existCheck(obj.code, 'iotpyrs') == 'no':
+                    db_kit.insert(obj)
+                    printObj(obj)
+           if True:
+               obj = INOCC()
+               obj.name = header + '-' + str(tds[1].p.contents[1].get_text().strip()) if header != '' else str(tds[1].p.contents[1].get_text()).strip()
+               obj.name = obj.name.strip()
+               obj.code = tds[1].p.contents[0].get_text().strip()
+               obj.insurance = 'iotpyrs'
+               obj.pCode = sCode
+               obj.type = tds[3].p.span.get_text().strip()
+               db_kit.insert(obj)
+               printObj(obj)
+        if len(tds)==3:
+           if True:
+               obj = INOCC()
+               obj.name = header + '-' + str(tds[0].p.contents[1].get_text()).strip() if header != '' else str(tds[0].p.contents[1].get_text()).strip()
+               obj.name = obj.name.strip()
+               obj.code = tds[0].p.contents[0].get_text().strip()
+               obj.insurance = 'iotpyrs'
+               obj.pCode = sCode
+               try:
+                   obj.type = tds[2].get_text().strip()
+               except AttributeError :
+                   print(tds[2]+'===========================================================================')
+
+
+               db_kit.insert(obj)
+               printObj(obj)
+        if len(tds)==2:
+            ps = tds[0].find_all('p')
+            if len(ps)==2:
+                sCode = str(ps[0].get_text()).strip()
+                sName = str(ps[1].get_text()).strip()
+                obj = INOCC()
+                obj.pCode = fCode
+                obj.code = sCode
+                obj.name = sName
+                obj.insurance = 'iotpyrs'
+                if db_kit.existCheck(obj.code, 'iotpyrs') == 'no':
+                    db_kit.insert(obj)
+                    printObj(obj)
+            if tds[1].p.span.get_text().strip() != '':
+               header=tds[1].p.span.get_text().strip()
+        if len(tds)==1:
+           if tds[0].p.span.get_text().strip() != '' and not str(tds[0].p.span.get_text()).strip().startswith('注：'):
+               header=tds[0].p.span.get_text().strip()
+           else:
+               continue
+    lastF = fCode
 
 
 def printObj(obj):
