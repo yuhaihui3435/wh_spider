@@ -312,6 +312,250 @@ def RAndWTPYRS_html():
     lastF = fCode
 
 
+def WAndRAxcc():
+    workbook = xlrd.open_workbook('/Users/yuhaihui8913/Documents/wh/安心财产职业类别表.xlsx')
+    sheet = workbook.sheet_by_index(0)
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    insurance='ioaxcc'
+    for i in range(5, 686):
+        if (str(sheet.cell(i, 5).value).strip() != ''):
+            fCode = str(sheet.cell(i, 5).value).strip()
+            fName = str(sheet.cell(i, 5).value).strip()
+            if fCode != lastF:
+                header = ''
+            obj = INOCC()
+            obj.code = fCode
+            obj.name = fName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 6).value).strip() != ''):
+            sCode = str(sheet.cell(i, 6).value).strip()
+            sName = str(sheet.cell(i, 6).value).strip()
+            obj = INOCC()
+            obj.pCode = fCode
+            obj.code = sCode
+            obj.name = sName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 7).value).strip() != ''):
+
+            obj = INOCC()
+            obj.name = header + '-' + str(sheet.cell(i, 7).value) if header != '' else str(sheet.cell(i, 7).value)
+            obj.name = obj.name.strip()
+            obj.code = obj.name
+            obj.insurance = insurance
+            obj.pCode = sCode
+            if sheet.cell(i, 8).ctype == 2:
+                obj.type = int(sheet.cell(i, 8).value) if str(sheet.cell(i, 8).value).strip() != '' else ''
+            else:
+                obj.type = str(sheet.cell(i, 8).value).strip()
+            db_kit.insert(obj)
+            printObj(obj)
+        elif str(sheet.cell(i, 7).value).strip().startswith('注：'):
+            continue
+        else:
+            header = str(sheet.cell(i, 7).value)
+
+        lastF = fCode
+
+def WAndRHt():
+    workbook = xlrd.open_workbook('/Users/yuhaihui8913/Documents/wh/华泰职业类别表.xls')
+    sheet = workbook.sheet_by_index(0)
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    insurance='ioht'
+    for i in range(2, 998):
+        if (str(sheet.cell(i, 0).value).strip() != ''):
+            fCode = str(sheet.cell(i, 0).value).strip()
+            fName = (str(sheet.cell(i, 1).value).strip())[2:]
+            if fCode != lastF:
+                header = ''
+            obj = INOCC()
+            obj.code = fCode
+            obj.name = fName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 2).value).strip() != ''):
+            sCode = str(sheet.cell(i, 2).value).strip()
+            sName = (str(sheet.cell(i, 3).value).strip())[4:]
+            obj = INOCC()
+            obj.pCode = fCode
+            obj.code = sCode
+            obj.name = sName
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 4).value).strip() != ''):
+
+            obj = INOCC()
+            obj.name = header + '-' + str(sheet.cell(i, 5).value) if header != '' else str(sheet.cell(i, 5).value)
+            obj.name = obj.name.strip()
+            obj.code = str(sheet.cell(i, 4).value).strip()
+            obj.insurance = insurance
+            obj.pCode = sCode
+            if sheet.cell(i, 6).ctype == 2:
+                obj.type = int(sheet.cell(i, 6).value) if str(sheet.cell(i, 6).value).strip() != '' else ''
+            else:
+                obj.type = str(sheet.cell(i, 6).value).strip()
+            db_kit.insert(obj)
+            printObj(obj)
+        elif str(sheet.cell(i, 5).value).strip().startswith('注：'):
+            continue
+        else:
+            header = str(sheet.cell(i, 5).value)
+
+        lastF = fCode
+
+def WAndRRbcc():
+    workbook = xlrd.open_workbook('/Users/yuhaihui8913/Documents/wh/人保财产.xls')
+    sheet = workbook.sheet_by_index(1)
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    insurance='iorbcc'
+    for i in range(1, 699):
+        if (str(sheet.cell(i, 0).value).strip() != ''):
+            fCode = (str(sheet.cell(i, 0).value).strip())[0:2]
+            fName = (str(sheet.cell(i, 0).value).strip())[2:]
+            if fCode != lastF:
+                header = ''
+            obj = INOCC()
+            obj.code = fCode.replace(' ','')
+            obj.name = fName.replace(' ','')
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 1).value).strip() != ''):
+            sCode = (str(sheet.cell(i, 1).value).strip())[0:4]
+            sName = (str(sheet.cell(i, 1).value).strip())[4:]
+            obj = INOCC()
+            obj.pCode = fCode
+            obj.code = sCode.replace(' ','')
+            obj.name = sName.replace(' ','')
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 2).value).strip() != '' and (str(sheet.cell(i, 2).value).startswith('0') or str(sheet.cell(i, 2).value).startswith('1') or str(sheet.cell(i, 2).value).startswith('2'))):
+
+            obj = INOCC()
+            obj.name = header + '-' + (str(sheet.cell(i, 2).value).strip())[6:] if header != '' else (str(sheet.cell(i, 2).value).strip())[6:]
+            obj.name = obj.name.replace(' ','')
+            obj.code = (str(sheet.cell(i, 2).value).strip())[0:6]
+            obj.code=obj.code.replace(' ','')
+            obj.insurance = insurance
+            obj.pCode = sCode
+            if sheet.cell(i, 3).ctype == 2:
+                obj.type = int(sheet.cell(i, 3).value) if str(sheet.cell(i, 3).value).strip() != '' else ''
+            else:
+                obj.type = str(sheet.cell(i, 3).value).strip()
+            db_kit.insert(obj)
+            printObj(obj)
+        elif str(sheet.cell(i, 2).value).strip().startswith('注：'):
+            continue
+        else:
+            header = str(sheet.cell(i, 2).value).strip()
+
+        lastF = fCode
+        print(str(i))
+#人保健康
+def WAndRRbjk():
+    workbook = xlrd.open_workbook('/Users/yuhaihui8913/Documents/wh/人保健康职业类别表.xlsx')
+    sheet = workbook.sheet_by_index(0)
+    obj = None
+    fCode = ''
+    fName = ''
+    sCode = ''
+    header = ''
+    lastF = ''
+    insurance='iorbjk'
+    for i in range(1, 325):
+        if (str(sheet.cell(i, 0).value).strip() != ''):
+            fCode = (int(sheet.cell(i, 0).value))
+            fName = (str(sheet.cell(i, 1).value).strip())
+            if fCode != lastF:
+                header = ''
+            obj = INOCC()
+            obj.code = fCode
+            obj.name = fName.replace(' ','')
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if (str(sheet.cell(i, 2).value).strip() != ''):
+            sCode = (int(sheet.cell(i, 2).value))
+            sName = (str(sheet.cell(i, 3).value).strip())
+            obj = INOCC()
+            obj.pCode = fCode
+            obj.code = sCode
+            obj.name = sName.replace(' ','')
+            obj.insurance = insurance
+            # if db_kit.existCheck(obj.code, insurance) == 'no':
+            db_kit.insert(obj)
+            printObj(obj)
+        if str(sheet.cell(i, 4).value).strip() != '' :
+
+            obj = INOCC()
+
+            s=str(sheet.cell(i,4).value).replace(' ','')
+            if s.startswith('ns'):
+                obj.name = header + '-' + (str(sheet.cell(i, 4).value).strip()) if header != '' else (str(sheet.cell(i, 4).value).strip())
+                obj.name = obj.name.replace(' ','')
+                obj.code = str(sCode)+'00'
+                obj.code=obj.code.replace(' ','')
+                obj.insurance = insurance
+                obj.pCode = sCode
+                if sheet.cell(i, 5).ctype == 2:
+                    obj.type = int(sheet.cell(i, 5).value) if str(sheet.cell(i, 5).value).strip() != '' else ''
+                else:
+                    obj.type = str(sheet.cell(i, 5).value).strip()
+                db_kit.insert(obj)
+            else:
+                l=s.split('、')
+                j=0;
+                for tname in l:
+                    obj = INOCC()
+                    obj.name = header + '-' + tname if header != '' else tname
+                    obj.name = obj.name.replace(' ', '')
+                    obj.code = str(sCode) + str(j).zfill(2)
+                    obj.code = obj.code.replace(' ', '')
+                    obj.insurance = insurance
+                    obj.pCode = sCode
+                    if sheet.cell(i, 5).ctype == 2:
+                        obj.type = int(sheet.cell(i, 5).value) if str(sheet.cell(i, 5).value).strip() != '' else ''
+                    else:
+                        obj.type = str(sheet.cell(i, 5).value).strip()
+                    db_kit.insert(obj)
+                    j+=1
+
+        elif str(sheet.cell(i, 2).value).strip().startswith('注：'):
+            continue
+        else:
+            header = str(sheet.cell(i, 2).value).strip()
+
+        lastF = fCode
+        print(str(i))
+
 def printObj(obj):
     print('\n'.join(['%s:%s' % item for item in obj.__dict__.items()]))
 
@@ -323,4 +567,8 @@ if __name__ == '__main__':
     # RAndWXls('/Users/yuhaihui/Documents/wh/人保财产.xls',2,679,699,'iorbcc',False)
     # RAndWPACC('/Users/yuhaihui8913/Documents/wh/太平洋财产.xls',1,868,'iotpycc')
     # RAndWPAYL('/Users/yuhaihui8913/Documents/wh/职业类别表(平安).xls',2,1223,'iopayl')
-    RAndWTPYRS_html()
+    # RAndWTPYRS_html()
+    # WAndRAxcc()
+    # WAndRHt()
+    # WAndRRbcc()
+    WAndRRbjk()
